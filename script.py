@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return '<h1>Currency Rate API</h1> <p>Example URL: /api/v1/usd-eur'
+    return '<h1>CurrencyXchange-API</h1> <p>Example URL: /api/v1/usd-eur'
 
 
 @app.route('/api/v1/<in_curr>-<out_curr>')
