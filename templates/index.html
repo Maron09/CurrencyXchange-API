@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CurrencyXchange-API</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background-image: url('/static/pexels-felix-mittermeier-956999.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+
+        form {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .result-card {
+            width: 300px;
+            margin: 0 auto;
+            margin-top: 50px;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .result {
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CurrencyXchange-API</h1>
+    <form id="currencyForm">
+        <input type="text" id="inputCurrency" placeholder="Input Currency">
+        <input type="text" id="outputCurrency" placeholder="Output Currency">
+        <button type="submit">Get Rate</button>
+    </form>
+    <div class="result-card">
+        <div class="result">
+            <p id="rateResult"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('currencyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const inputCurrency = document.getElementById('inputCurrency').value;
+            const outputCurrency = document.getElementById('outputCurrency').value;
+            fetch(`/api/v1/${inputCurrency}-${outputCurrency}`)
+                .then(response => response.json())
+                .then(data => {
+                    const rateResult = document.getElementById('rateResult');
+                    rateResult.innerHTML = `Rate: ${data.Rate}`;
+                })
+                .catch(error => console.error(error));
+        });
+    </script>
+</body>
+</html>
